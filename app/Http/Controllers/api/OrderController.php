@@ -34,6 +34,7 @@ class OrderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
+            'status' => 'sometimes|in:in_progress,done'
         ]);
 
         if ($validator->fails()) {
@@ -42,10 +43,14 @@ class OrderController extends Controller
 
         $user = $request->user();
 
-        $order = Order::create([
-            'admin_id' => $user->id,
-            'name' => $request->name,
-        ]);
+        $order = new Order;
+        $order->admin_id = $user->id;
+        $order->name = $request->name;
+        if ($request->has('status')) {
+            $order->status = $request->status;
+        }
+
+        $order->save();
 
         return response()->json(['message' => 'Order has been created', 'data' => $order]);
     }
@@ -68,10 +73,10 @@ class OrderController extends Controller
             return response()->json(['message' => 'Order not found'], 404);
         }
 
-        if ($request->name) {
+        if ($request->has('name')) {
             $order->name = $request->name;
         }
-        if ($request->status) {
+        if ($request->has('status')) {
             $order->status = $request->status;
         }
 

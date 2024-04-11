@@ -15,17 +15,21 @@ class AuthController extends Controller
         $validator = Validator::make($request->all(), [
             'username' => 'required|string',
             'password' => 'required|string',
-            'role' => 'required|in:admin,roastery'
         ]);
 
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()], 422);
         }
 
+        $user = User::where('username', $request->username)->first();
+
+        if ($user) {
+            return response()->json(['message' => 'User already exists'], 422);
+        }
+
         User::create([
             'username' => $request->username,
             'password' => bcrypt($request->password),
-            'role' => $request->role,
         ]);
 
         return response()->json(['message' => 'User has been created']);
