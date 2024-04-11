@@ -13,4 +13,12 @@ class Order extends Model
         'admin_id',
         'name',
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class, 'admin_id');
+    }
+
+    public function company() {
+        return $this->belongsTo(Company::class);
+    }
 }

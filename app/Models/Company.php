@@ -15,4 +15,8 @@ class Company extends Model
         'name',
         'address'
     ];
+
+    public function orders() {
+        return $this->hasMany(Order::class);
+    }
 }
