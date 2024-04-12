@@ -14,7 +14,7 @@ class MemberSeeder extends Seeder
      */
     public function run()
     {
-        $now = now();
+        $now = now('Asia/Jakarta');
 
         DB::table('members')->insert([
             'user_id' => 1,
@@ -33,6 +33,29 @@ class MemberSeeder extends Seeder
         DB::table('members')->insert([
             'user_id' => 3,
             'company_id' => 1,
+            'role' => 'roastery',
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+
+        //Second members
+        DB::table('members')->insert([
+            'user_id' => 4,
+            'company_id' => 2,
+            'role' => 'owner',
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+        DB::table('members')->insert([
+            'user_id' => 5,
+            'company_id' => 2,
+            'role' => 'admin',
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+        DB::table('members')->insert([
+            'user_id' => 6,
+            'company_id' => 2,
             'role' => 'roastery',
             'created_at' => $now,
             'updated_at' => $now,

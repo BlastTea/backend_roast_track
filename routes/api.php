@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\CompanyController;
 use App\Http\Controllers\api\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('v1/sign-out', [AuthController::class, 'signOut']);
 
     Route::get('v1/orders', [OrderController::class, 'getOrders']);
+
+    Route::get('v1/companies', [CompanyController::class, 'getCompanies']);
 
     Route::middleware('ensure_admin')->group(function () {
         Route::post('v1/orders', [OrderController::class, 'addOrder']);

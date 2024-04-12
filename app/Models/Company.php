@@ -19,4 +19,8 @@ class Company extends Model
     public function orders() {
         return $this->hasMany(Order::class);
     }
+
+    public function members() {
+        return $this->hasMany(Member::class, 'company_id');
+    }
 }

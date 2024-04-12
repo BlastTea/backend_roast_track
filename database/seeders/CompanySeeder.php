@@ -14,10 +14,16 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
-        $now = now();
+        $now = now('Asia/Jakarta');
 
         DB::table('companies')->insert([
             'name' => 'M Roasting',
+            'address' => 'Jl. antah berantah',
+            'created_at' => $now,
+            'updated_at' => $now,
+        ]);
+        DB::table('companies')->insert([
+            'name' => 'M Roasting 2',
             'address' => 'Jl. antah berantah',
             'created_at' => $now,
             'updated_at' => $now,
