@@ -13,6 +13,7 @@ class OrderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'admin_id' => 'sometimes|int',
+            'company_id' => 'sometimes|int',
             'status' => 'sometimes|in:in_progress,done',
         ]);
 
@@ -24,6 +25,9 @@ class OrderController extends Controller
         
         if ($request->has('admin_id')) {
             $query->where('admin_id', $request->admin_id);
+        }
+        if ($request->has('company_id')) {
+            $query->where('company_id', $request->company_id);
         }
         if ($request->has('status')) {
             $query->where('status', $request->status);
@@ -37,6 +41,7 @@ class OrderController extends Controller
     public function addOrder(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'company_id' => 'required|int',
             'name' => 'required|string',
             'status' => 'sometimes|in:in_progress,done'
         ]);
@@ -49,6 +54,7 @@ class OrderController extends Controller
 
         $order = new Order;
         $order->admin_id = $user->id;
+        $order->company_id = $request->company_id;
         $order->name = $request->name;
         if ($request->has('status')) {
             $order->status = $request->status;
