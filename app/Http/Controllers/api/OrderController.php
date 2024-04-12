@@ -12,6 +12,7 @@ class OrderController extends Controller
     public function getOrders(Request $request)
     {
         $validator = Validator::make($request->all(), [
+            'admin_id' => 'sometimes|int',
             'status' => 'sometimes|in:in_progress,done',
         ]);
 
@@ -20,8 +21,11 @@ class OrderController extends Controller
         }
 
         $query = Order::query();
-
-        if ($request->status) {
+        
+        if ($request->has('admin_id')) {
+            $query->where('admin_id', $request->admin_id);
+        }
+        if ($request->has('status')) {
             $query->where('status', $request->status);
         }
 
