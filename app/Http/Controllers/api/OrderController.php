@@ -19,7 +19,7 @@ class OrderController extends Controller
             return response()->json(['message' => $validator->errors()], 422);
         }
 
-        $query = Order::with('user')->with('company');
+        $query = Order::query();
 
         if ($request->status) {
             $query->where('status', $request->status);

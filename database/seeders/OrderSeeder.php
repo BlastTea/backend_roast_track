@@ -14,10 +14,14 @@ class OrderSeeder extends Seeder
      */
     public function run()
     {
+        $now = now();
+
         DB::table('orders')->insert([
             'admin_id' => 2,
             'company_id' => 1,
             'name' => 'Order 1',
+            'created_at' => $now,
+            'updated_at' => $now,
         ]);
     }
 }

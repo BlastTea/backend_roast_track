@@ -14,9 +14,13 @@ class CompanySeeder extends Seeder
      */
     public function run()
     {
+        $now = now();
+
         DB::table('companies')->insert([
             'name' => 'M Roasting',
             'address' => 'Jl. antah berantah',
+            'created_at' => $now,
+            'updated_at' => $now,
         ]);
     }
 }
