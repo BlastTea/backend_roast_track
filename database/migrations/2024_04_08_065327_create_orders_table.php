@@ -17,6 +17,9 @@ class CreateOrdersTable extends Migration
             $table->id();
             $table->foreignId('admin_id')->constrained('users');
             $table->foreignId('company_id')->constrained('companies');
+            $table->string('orderers_name', 100);
+            $table->string('address', 255);
+            
             $table->string('name', 100);
             $table->enum('status', ['in_progress', 'done'])->default('in_progress');
             $table->timestamps();
