@@ -5,13 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClassificationResult extends Model
+class ClassificationRoastingResult extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'company_id',
+        'roasting_id',
         'result',
-        'result_label'
-    ];
+        'resulst_label',
+    ]; 
 }

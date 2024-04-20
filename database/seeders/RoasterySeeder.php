@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class OrderSeeder extends Seeder
+class RoasterySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,29 +16,24 @@ class OrderSeeder extends Seeder
     {
         $now = now('Asia/Jakarta');
 
-        DB::table('orders')->insert([
-            'admin_id' => 1,
+        DB::table('roasteries')->insert([
+            'user_id' => 2,
             'company_id' => 1,
-            'orderers_name' => 'Order 1',
+            'name' => 'Johny',
             'address' => 'Jalan antah berantah, gang buntu',
-            'bean_type' => 'dark',
-            'from_district' => 'Desa sidomulyo',
-            'amount' => 1,
-            'total' => 100000,
+            'phone_number' => '0812345678901',
+            'description' => 'Saya adalah seorang roastery, hihihihi',
             'created_at' => $now,
             'updated_at' => $now,
         ]);
-        
-        // Second order
-        DB::table('orders')->insert([
-            'admin_id' => 3,
+
+        DB::table('roasteries')->insert([
+            'user_id' => 4,
             'company_id' => 2,
-            'orderers_name' => 'Order 1',
+            'name' => 'Johny 2',
             'address' => 'Jalan antah berantah, gang buntu',
-            'bean_type' => 'dark',
-            'from_district' => 'Desa sidomulyo',
-            'amount' => 2,
-            'total' => 200000,
+            'phone_number' => '0812345678901',
+            'description' => 'Saya adalah seorang roastery, hihihihi',
             'created_at' => $now,
             'updated_at' => $now,
         ]);

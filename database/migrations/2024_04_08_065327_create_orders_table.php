@@ -19,8 +19,10 @@ class CreateOrdersTable extends Migration
             $table->foreignId('company_id')->constrained('companies');
             $table->string('orderers_name', 100);
             $table->string('address', 255);
-            
-            $table->string('name', 100);
+            $table->enum('bean_type', ['light', 'medium', 'dark']);
+            $table->string('from_district', 100);
+            $table->integer('amount');
+            $table->double('total');
             $table->enum('status', ['in_progress', 'done'])->default('in_progress');
             $table->timestamps();
         });

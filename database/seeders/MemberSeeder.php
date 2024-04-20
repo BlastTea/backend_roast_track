@@ -19,19 +19,12 @@ class MemberSeeder extends Seeder
         DB::table('members')->insert([
             'user_id' => 1,
             'company_id' => 1,
-            'role' => 'owner',
-            'created_at' => $now,
-            'updated_at' => $now,
-        ]);
-        DB::table('members')->insert([
-            'user_id' => 2,
-            'company_id' => 1,
             'role' => 'admin',
             'created_at' => $now,
             'updated_at' => $now,
         ]);
         DB::table('members')->insert([
-            'user_id' => 3,
+            'user_id' => 2,
             'company_id' => 1,
             'role' => 'roastery',
             'created_at' => $now,
@@ -40,21 +33,14 @@ class MemberSeeder extends Seeder
 
         //Second members
         DB::table('members')->insert([
-            'user_id' => 4,
-            'company_id' => 2,
-            'role' => 'owner',
-            'created_at' => $now,
-            'updated_at' => $now,
-        ]);
-        DB::table('members')->insert([
-            'user_id' => 5,
+            'user_id' => 3,
             'company_id' => 2,
             'role' => 'admin',
             'created_at' => $now,
             'updated_at' => $now,
         ]);
         DB::table('members')->insert([
-            'user_id' => 6,
+            'user_id' => 4,
             'company_id' => 2,
             'role' => 'roastery',
             'created_at' => $now,

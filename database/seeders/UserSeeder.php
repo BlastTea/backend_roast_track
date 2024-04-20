@@ -17,19 +17,15 @@ class UserSeeder extends Seeder
         $now = now('Asia/Jakarta');
 
         DB::table('users')->insert([
-            'username' => 'owner',
-            'password' => '$2y$10$PbKGhTF7EkfUOVt8yzegb.eEdnxEnFcAjmvyGhBFs8DVUwbMijm8y',
-            'created_at' => $now,
-            'updated_at' => $now,
-        ]);
-        DB::table('users')->insert([
             'username' => 'admin',
+            'email' => 'admin@gmail.com',
             'password' => '$2y$10$Ey/BIoJr.V0XkH1fKoOwPeDwVfUzi/EjoKEOl.50Z4.Jrt9DQB/sK',
             'created_at' => $now,
             'updated_at' => $now,
         ]);
         DB::table('users')->insert([
             'username' => 'roastery',
+            'email' => 'roastery@gmail.com',
             'password' => '$2y$10$nb7oyN5vtQ4F9duGjUq4ueqZeH60BU0CQqrwLFSH/A/7gLzAy4cbm',
             'created_at' => $now,
             'updated_at' => $now,
@@ -37,19 +33,15 @@ class UserSeeder extends Seeder
 
         /// Second users
         DB::table('users')->insert([
-            'username' => 'owner2',
-            'password' => '$2y$10$PbKGhTF7EkfUOVt8yzegb.eEdnxEnFcAjmvyGhBFs8DVUwbMijm8y',
-            'created_at' => $now,
-            'updated_at' => $now,
-        ]);
-        DB::table('users')->insert([
             'username' => 'admin2',
+            'email' => 'admin2@gmail.com',
             'password' => '$2y$10$Ey/BIoJr.V0XkH1fKoOwPeDwVfUzi/EjoKEOl.50Z4.Jrt9DQB/sK',
             'created_at' => $now,
             'updated_at' => $now,
         ]);
         DB::table('users')->insert([
             'username' => 'roastery2',
+            'email' => 'roastery2@gmail.com',
             'password' => '$2y$10$nb7oyN5vtQ4F9duGjUq4ueqZeH60BU0CQqrwLFSH/A/7gLzAy4cbm',
             'created_at' => $now,
             'updated_at' => $now,

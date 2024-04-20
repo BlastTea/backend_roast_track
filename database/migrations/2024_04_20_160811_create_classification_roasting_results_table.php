@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClassificationResultsTable extends Migration
+class CreateClassificationRoastingResultsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class CreateClassificationResultsTable extends Migration
      */
     public function up()
     {
-        Schema::create('classification_results', function (Blueprint $table) {
+        Schema::create('classification_roasting_results', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('company_id')->constrained('companies');
+            $table->foreignId('roasting_id')->constrained();
             $table->json('result');
             $table->enum('result_label', ['green', 'light', 'medium', 'dark']);
             $table->timestamps();
@@ -29,6 +29,6 @@ class CreateClassificationResultsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('classification_results');
+        Schema::dropIfExists('classification_roasting_results');
     }
 }

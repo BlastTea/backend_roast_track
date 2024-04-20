@@ -22,7 +22,7 @@ class OrderController extends Controller
         }
 
         $query = Order::query();
-        
+
         if ($request->has('admin_id')) {
             $query->where('admin_id', $request->admin_id);
         }
@@ -42,8 +42,13 @@ class OrderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'company_id' => 'required|int',
-            'name' => 'required|string',
-            'status' => 'sometimes|in:in_progress,done'
+            'orderers_name' => 'required|string',
+            'address' => 'required|string',
+            'bean_type' => 'required|in:light,medium,dark',
+            'from_district' => 'required|string',
+            'amount' => 'required|num',
+            'total' => 'required|num',
+            'status' => 'sometimes|in:in_progress,done',
         ]);
 
         if ($validator->fails()) {
@@ -69,7 +74,12 @@ class OrderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id' => 'required|int',
-            'name' => 'sometimes|string',
+            'orderers_name' => 'sometimes|string',
+            'address' => 'sometimes|string',
+            'bean_type' => 'sometimes|in:light,medium,dark',
+            'from_district' => 'sometimes|string',
+            'amount' => 'sometimes|num',
+            'total' => 'sometimes|num',
             'status' => 'sometimes|in:in_progress,done'
         ]);
 

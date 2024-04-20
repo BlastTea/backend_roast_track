@@ -11,7 +11,14 @@ class Order extends Model
 
     protected $fillable = [
         'admin_id',
-        'name',
+        'company_id',
+        'orderers_name',
+        'address',
+        'bean_type',
+        'from_district',
+        'amount',
+        'total',
+        'status',
     ];
 
     public function user() {

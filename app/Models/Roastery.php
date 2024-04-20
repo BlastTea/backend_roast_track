@@ -5,13 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClassificationResult extends Model
+class Roastery extends Model
 {
     use HasFactory;
 
+    protected $table = 'roasteries';
+
     protected $fillable = [
+        'user_id',
         'company_id',
-        'result',
-        'result_label'
+        'name',
+        'address',
+        'phone_number',
+        'description',
     ];
 }
