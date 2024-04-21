@@ -46,8 +46,8 @@ class OrderController extends Controller
             'address' => 'required|string',
             'bean_type' => 'required|in:light,medium,dark',
             'from_district' => 'required|string',
-            'amount' => 'required|num',
-            'total' => 'required|num',
+            'amount' => 'required|integer',
+            'total' => 'required|numeric|regex:/^-?[0-9]+(\.[0-9]{1,2})?$/',
             'status' => 'sometimes|in:in_progress,done',
         ]);
 
@@ -83,8 +83,8 @@ class OrderController extends Controller
             'address' => 'sometimes|string',
             'bean_type' => 'sometimes|in:light,medium,dark',
             'from_district' => 'sometimes|string',
-            'amount' => 'sometimes|num',
-            'total' => 'sometimes|num',
+            'amount' => 'sometimes|integer',
+            'total' => 'sometimes|numeric|regex:/^-?[0-9]+(\.[0-9]{1,2})?$/',
             'status' => 'sometimes|in:in_progress,done'
         ]);
 
