@@ -65,7 +65,7 @@ class OrderController extends Controller
         $order->bean_type = $request->bean_type;
         $order->from_district = $request->from_district;
         $order->amount = $request->amount;
-        $order->total = $request->total;
+        $order->total = doubleval($request->total);
         if ($request->has('status')) {
             $order->status = $request->status;
         }
@@ -114,7 +114,7 @@ class OrderController extends Controller
             $order->amount = $request->amount;
         }
         if ($request->has('total')) {
-            $order->total = $request->total;
+            $order->total = doubleval($request->total);
         }
         if ($request->has('status')) {
             $order->status = $request->status;
