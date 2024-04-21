@@ -23,6 +23,11 @@ class User extends Authenticatable
         'remember_token',
     ];
 
+    public function freshTimestamp()
+    {
+        return now('Asia/Jakarta');
+    }
+
     public function orders() {
         return $this->hasMany(Order::class, 'admin_id');
     }

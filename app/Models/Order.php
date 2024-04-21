@@ -3,9 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
 
-class Order extends Model
+class Order extends BaseModel
 {
     use HasFactory;
 
@@ -21,11 +20,13 @@ class Order extends Model
         'status',
     ];
 
-    public function user() {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'admin_id');
     }
 
-    public function company() {
+    public function company()
+    {
         return $this->belongsTo(Company::class);
     }
 }
