@@ -60,7 +60,12 @@ class OrderController extends Controller
         $order = new Order;
         $order->admin_id = $user->id;
         $order->company_id = $request->company_id;
-        $order->name = $request->name;
+        $order->orderers_name = $request->orderers_name;
+        $order->address = $request->address;
+        $order->bean_type = $request->bean_type;
+        $order->from_district = $request->from_district;
+        $order->amount = $request->amount;
+        $order->total = $request->total;
         if ($request->has('status')) {
             $order->status = $request->status;
         }
@@ -93,8 +98,23 @@ class OrderController extends Controller
             return response()->json(['message' => 'Order not found'], 404);
         }
 
-        if ($request->has('name')) {
-            $order->name = $request->name;
+        if ($request->has('orderers_name')) {
+            $order->orderers_name = $request->orderers_name;
+        }
+        if ($request->has('address')) {
+            $order->address = $request->address;
+        }
+        if ($request->has('bean_type')) {
+            $order->bean_type = $request->bean_type;
+        }
+        if ($request->has('from_district')) {
+            $order->from_district = $request->from_district;
+        }
+        if ($request->has('amount')) {
+            $order->amount = $request->amount;
+        }
+        if ($request->has('total')) {
+            $order->total = $request->total;
         }
         if ($request->has('status')) {
             $order->status = $request->status;

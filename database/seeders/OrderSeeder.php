@@ -19,7 +19,7 @@ class OrderSeeder extends Seeder
         DB::table('orders')->insert([
             'admin_id' => 1,
             'company_id' => 1,
-            'orderers_name' => 'Order 1',
+            'orderers_name' => 'Zalorin Vexstar',
             'address' => 'Jalan antah berantah, gang buntu',
             'bean_type' => 'dark',
             'from_district' => 'Desa sidomulyo',
@@ -33,7 +33,7 @@ class OrderSeeder extends Seeder
         DB::table('orders')->insert([
             'admin_id' => 3,
             'company_id' => 2,
-            'orderers_name' => 'Order 1',
+            'orderers_name' => 'Zalorin Vexstar',
             'address' => 'Jalan antah berantah, gang buntu',
             'bean_type' => 'dark',
             'from_district' => 'Desa sidomulyo',
