@@ -18,13 +18,7 @@ class EnsureAdminMiddleware
     {
         $user = $request->user();
 
-        $companyId = $request->company_id;
-
-        if (!$companyId) {
-            return response()->json(['message' => 'No company ID provided'], 400);
-        }
-
-        $isAdmin = $user->members()->where('role', 'admin')->where('company_id', $companyId)->exists();
+        $isAdmin = $user->role === 'admin';
 
         if (!$isAdmin) {
             return response()->json(['message' => 'Permission denied'], 403);

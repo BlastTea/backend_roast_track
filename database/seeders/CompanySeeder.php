@@ -17,14 +17,12 @@ class CompanySeeder extends Seeder
         $now = now('Asia/Jakarta');
 
         DB::table('companies')->insert([
-            'admin_id' => 1,
             'name' => 'M Roasting',
             'address' => 'Jl. antah berantah',
             'created_at' => $now,
             'updated_at' => $now,
         ]);
         DB::table('companies')->insert([
-            'admin_id' => 2,
             'name' => 'M Roasting 2',
             'address' => 'Jl. antah berantah',
             'created_at' => $now,

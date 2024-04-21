@@ -12,5 +12,9 @@ class ClassificationRoastingResult extends BaseModel
         'roasting_id',
         'result',
         'resulst_label',
-    ]; 
+    ];
+
+    public function roasting() {
+        return $this->belongsTo(Roasting::class);
+    }
 }

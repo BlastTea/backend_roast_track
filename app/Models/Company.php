@@ -15,11 +15,15 @@ class Company extends BaseModel
         'address'
     ];
 
-    public function orders() {
-        return $this->hasMany(Order::class);
+    public function users() {
+        return $this->hasMany(User::class, 'company_id');
     }
 
-    public function members() {
-        return $this->hasMany(Member::class, 'company_id');
+    public function orders() {
+        return $this->hasMany(Order::class, 'company_id');
+    }
+
+    public function classificationResults() {
+        return $this->hasMany(ClassificationResult::class, 'company_id');
     }
 }

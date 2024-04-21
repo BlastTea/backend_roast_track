@@ -13,8 +13,8 @@ class AuthController extends Controller
     public function signUp(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required|string',
-            'email' => 'required|email',
+            'username' => 'required|string|max:100',
+            'email' => 'required|email|max:100',
             'password' => 'required|string',
         ]);
 
@@ -40,7 +40,7 @@ class AuthController extends Controller
     public function signIn(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'username' => 'required|string',
+            'username' => 'required|string|max:100',
             'password' => 'required|string'
         ]);
 
@@ -48,7 +48,7 @@ class AuthController extends Controller
             return response()->json(['message' => $validator->errors()], 422);
         }
 
-        $user = User::where('username', $request->username)->first();
+        $user = User::with('company')->where('username', $request->username)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             return response()->json(['message' => 'Sign in failed'], 401);

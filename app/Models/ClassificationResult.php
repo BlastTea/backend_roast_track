@@ -13,4 +13,8 @@ class ClassificationResult extends BaseModel
         'result',
         'result_label'
     ];
+
+    public function company() {
+        return $this->belongsTo(Company::class, 'company_id');
+    }
 }

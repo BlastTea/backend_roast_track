@@ -14,4 +14,20 @@ class Roasting extends BaseModel
         'unit',
         'time_elapsed'
     ];
+
+    public function user() {
+        return $this->belongsTo(User::class, 'roastery_id');
+    }
+
+    public function order() {
+        return $this->belongsTo(Order::class);
+    }
+
+    public function degrees() {
+        return $this->hasMany(Degree::class);
+    }
+
+    public function classificationRoastingResults() {
+        return $this->hasMany(ClassificationRoastingResult::class);
+    }
 }

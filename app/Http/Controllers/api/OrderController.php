@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Company;
 use App\Models\Order;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -42,10 +43,10 @@ class OrderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'company_id' => 'required|int',
-            'orderers_name' => 'required|string',
-            'address' => 'required|string',
+            'orderers_name' => 'required|string|max:100',
+            'address' => 'required|string|max:255',
             'bean_type' => 'required|in:light,medium,dark',
-            'from_district' => 'required|string',
+            'from_district' => 'required|string|max:100',
             'amount' => 'required|integer',
             'total' => 'required|numeric|regex:/^-?[0-9]+(\.[0-9]{1,2})?$/',
             'status' => 'sometimes|in:in_progress,done',
@@ -53,6 +54,12 @@ class OrderController extends Controller
 
         if ($validator->fails()) {
             return response()->json(['message' => $validator->errors()], 422);
+        }
+
+        $company = Company::find($request->company_id);
+
+        if (!$company) {
+            return response()->json(['message' => 'Company is not found'], 404);
         }
 
         $user = $request->user();
@@ -65,11 +72,10 @@ class OrderController extends Controller
         $order->bean_type = $request->bean_type;
         $order->from_district = $request->from_district;
         $order->amount = $request->amount;
-        $order->total = doubleval($request->total);
+        $order->total = $request->total;
         if ($request->has('status')) {
             $order->status = $request->status;
         }
-
         $order->save();
 
         return response()->json(['message' => 'Order has been created', 'data' => $order]);
@@ -79,10 +85,10 @@ class OrderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'id' => 'required|int',
-            'orderers_name' => 'sometimes|string',
-            'address' => 'sometimes|string',
+            'orderers_name' => 'sometimes|string|max:100',
+            'address' => 'sometimes|string|max:255',
             'bean_type' => 'sometimes|in:light,medium,dark',
-            'from_district' => 'sometimes|string',
+            'from_district' => 'sometimes|string|max:100',
             'amount' => 'sometimes|integer',
             'total' => 'sometimes|numeric|regex:/^-?[0-9]+(\.[0-9]{1,2})?$/',
             'status' => 'sometimes|in:in_progress,done'
@@ -95,7 +101,7 @@ class OrderController extends Controller
         $order = Order::find($request->id);
 
         if (!$order) {
-            return response()->json(['message' => 'Order not found'], 404);
+            return response()->json(['message' => 'Order is not found'], 404);
         }
 
         if ($request->has('orderers_name')) {
@@ -114,7 +120,7 @@ class OrderController extends Controller
             $order->amount = $request->amount;
         }
         if ($request->has('total')) {
-            $order->total = doubleval($request->total);
+            $order->total = $request->total;
         }
         if ($request->has('status')) {
             $order->status = $request->status;
@@ -138,7 +144,7 @@ class OrderController extends Controller
         $order = Order::find($request->id);
 
         if (!$order) {
-            return response()->json(['message' => 'Order not found'], 404);
+            return response()->json(['message' => 'Order is not found'], 404);
         }
 
         $order->delete();

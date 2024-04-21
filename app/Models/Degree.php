@@ -15,4 +15,8 @@ class Degree extends BaseModel
         'bean_temp',
         'time_elapsed'
     ];
+
+    public function roasting() {
+        return $this->belongsTo(Roasting::class);
+    }
 }

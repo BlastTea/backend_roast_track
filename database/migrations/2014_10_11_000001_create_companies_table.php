@@ -15,7 +15,6 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('admin_id')->constrained('users');
             $table->string('name', 100);
             $table->string('address', 255);
             $table->timestamps();
