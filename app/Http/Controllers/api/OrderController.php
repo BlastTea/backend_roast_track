@@ -20,11 +20,9 @@ class OrderController extends Controller
             return response()->json(['message' => $validator->errors()], 422);
         }
 
-        $company = $request->user()->company;
-
         $query = Order::query();
 
-        $query->where('company_id', $company->company_id);
+        $query->where('company_id', $request->user()->company_id);
 
         if ($request->has('status')) {
             $query->where('status', $request->status);
@@ -53,11 +51,9 @@ class OrderController extends Controller
 
         $user = $request->user();
 
-        $company = $user->company;
-
         $order = new Order;
         $order->admin_id = $user->id;
-        $order->company_id = $company->company_id;
+        $order->company_id = $user->company_id;
         $order->orderers_name = $request->orderers_name;
         $order->address = $request->address;
         $order->bean_type = $request->bean_type;

@@ -12,11 +12,9 @@ class RoasteryController extends Controller
 {
     public function getRoasteries(Request $request)
     {
-        $company = $request->user()->company;
-
         $query = User::where('role', 'roastery');
 
-        $query->where('company_id', $company->company_id);
+        $query->where('company_id', $request->user()->company_id);
 
         $users = $query->get();
 
@@ -39,16 +37,8 @@ class RoasteryController extends Controller
             return response()->json(['message' => $validator->errors()], 422);
         }
 
-        $user = $request->user();
-
-        $company = $user->company;
-
-        if (!$company) {
-            return response()->json(['message' => 'Company is not found'], 404);
-        }
-
         $user = new User;
-        $user->company_id = $request->company_id;
+        $user->company_id = $request->user()->company_id;
         $user->username = $request->username;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
