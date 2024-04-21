@@ -12,7 +12,7 @@ class RoasteryController extends Controller
 {
     public function getRoasteries(Request $request)
     {
-        $company = $request->user()->company();
+        $company = $request->user()->company;
 
         $query = User::where('role', 'roastery');
 
@@ -41,7 +41,7 @@ class RoasteryController extends Controller
 
         $user = $request->user();
 
-        $company = $user->company();
+        $company = $user->company;
 
         if (!$company) {
             return response()->json(['message' => 'Company is not found'], 404);

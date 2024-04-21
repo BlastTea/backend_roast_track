@@ -20,7 +20,7 @@ class OrderController extends Controller
             return response()->json(['message' => $validator->errors()], 422);
         }
 
-        $company = $request->user()->company();
+        $company = $request->user()->company;
 
         $query = Order::query();
 
@@ -53,7 +53,7 @@ class OrderController extends Controller
 
         $user = $request->user();
 
-        $company = $user->company();
+        $company = $user->company;
 
         $order = new Order;
         $order->admin_id = $user->id;
