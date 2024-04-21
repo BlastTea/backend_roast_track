@@ -13,8 +13,6 @@ class OrderController extends Controller
     public function getOrders(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'admin_id' => 'sometimes|int',
-            'company_id' => 'sometimes|int',
             'status' => 'sometimes|in:in_progress,done',
         ]);
 
@@ -22,14 +20,12 @@ class OrderController extends Controller
             return response()->json(['message' => $validator->errors()], 422);
         }
 
+        $company = $request->user()->company();
+
         $query = Order::query();
 
-        if ($request->has('admin_id')) {
-            $query->where('admin_id', $request->admin_id);
-        }
-        if ($request->has('company_id')) {
-            $query->where('company_id', $request->company_id);
-        }
+        $query->where('company_id', $company->company_id);
+
         if ($request->has('status')) {
             $query->where('status', $request->status);
         }
@@ -42,7 +38,6 @@ class OrderController extends Controller
     public function addOrder(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'company_id' => 'required|int',
             'orderers_name' => 'required|string|max:100',
             'address' => 'required|string|max:255',
             'bean_type' => 'required|in:light,medium,dark',
@@ -56,17 +51,13 @@ class OrderController extends Controller
             return response()->json(['message' => $validator->errors()], 422);
         }
 
-        $company = Company::find($request->company_id);
-
-        if (!$company) {
-            return response()->json(['message' => 'Company is not found'], 404);
-        }
-
         $user = $request->user();
+
+        $company = $user->company();
 
         $order = new Order;
         $order->admin_id = $user->id;
-        $order->company_id = $request->company_id;
+        $order->company_id = $company->company_id;
         $order->orderers_name = $request->orderers_name;
         $order->address = $request->address;
         $order->bean_type = $request->bean_type;

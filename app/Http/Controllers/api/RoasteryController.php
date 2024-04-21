@@ -12,19 +12,11 @@ class RoasteryController extends Controller
 {
     public function getRoasteries(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'company_id' => 'sometimes|int',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json(['message' => $validator->errors()], 422);
-        }
+        $company = $request->user()->company();
 
         $query = User::where('role', 'roastery');
 
-        if ($request->has('company_id')) {
-            $query->where('company_id', $request->company_id);
-        }
+        $query->where('company_id', $company->company_id);
 
         $users = $query->get();
 
@@ -95,7 +87,7 @@ class RoasteryController extends Controller
         if ($user->role !== 'roastery') {
             return response()->json(['message' => 'User is not a roastery'], 422);
         }
-        
+
         if ($request->has('email')) {
             $user->email = $request->email;
         }
@@ -120,7 +112,8 @@ class RoasteryController extends Controller
         return response()->json(['message' => 'Roastery has been updated', 'data' => $user]);
     }
 
-    public function deleteRoastery(Request $request) {
+    public function deleteRoastery(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'id' => 'required|int',
         ]);
