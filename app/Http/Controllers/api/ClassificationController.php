@@ -14,7 +14,7 @@ class ClassificationController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'roasting_id' => 'required|int',
-            'result.*.*' => 'required|numeric|regex:/^-?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][-+]?[0-9]+)?$/',
+            'result.*.*' => ['required', 'numeric', 'regex:/^-?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][-+]?[0-9]+)?$/'],
             'result_label' => 'required|in:green,light,medium,dark'
         ]);
 
@@ -34,7 +34,7 @@ class ClassificationController extends Controller
     public function addClassification(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'result.*.*' => 'required|numeric|regex:/^-?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][-+]?[0-9]+)?$/',
+            'result.*.*' => ['required', 'numeric', 'regex:/^-?(0|[1-9][0-9]*)(\.[0-9]+)?([eE][-+]?[0-9]+)?$/'],
             'result_label' => 'required|in:green,light,medium,dark'
         ]);
 
