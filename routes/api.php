@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\api\AuthController;
+use App\Http\Controllers\api\ClassificationController;
 use App\Http\Controllers\api\CompanyController;
 use App\Http\Controllers\api\OrderController;
 use App\Http\Controllers\api\RoasteryController;
+use App\Http\Controllers\api\RoastingController;
 use App\Http\Controllers\api\SalesStatisticsController;
 use App\Models\Company;
 use Illuminate\Http\Request;
@@ -54,5 +56,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::delete('v1/roasteries', [RoasteryController::class, 'deleteRoastery']);
 
         Route::get('v1/sales-statistics', [SalesStatisticsController::class, 'getSalesStatistics']);
+    });
+
+    Route::middleware('ensure_roastery')->group(function () {
+        Route::post('v1/roastings', [RoastingController::class, 'addRoasting']);
+
+        Route::post('v1/roasting-classifications', [ClassificationController::class, 'addRoastingClassification']);
+        Route::post('v1/classifications', [ClassificationController::class, 'addClassification']);
     });
 });

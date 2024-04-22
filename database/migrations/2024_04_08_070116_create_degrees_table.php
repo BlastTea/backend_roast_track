@@ -17,7 +17,7 @@ class CreateDegreesTable extends Migration
             $table->id();
             $table->foreignId('roasting_id')->constrained();
             $table->enum('type', ['charge', 'dry_end', 'fc_start', 'fc_end', 'sc_start', 'drop']);
-            $table->double('env_temp');
+            $table->double('env_temp')->default(0.0);
             $table->double('bean_temp');
             $table->double('time_elapsed');
             $table->timestamps();
