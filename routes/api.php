@@ -49,5 +49,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         Route::get('v1/roasteries', [RoasteryController::class, 'getRoasteries']);
         Route::post('v1/roasteries', [RoasteryController::class, 'addRoastery']);
+        Route::put('v1/roasteries', [RoasteryController::class, 'updateRoastery']);
+        Route::delete('v1/roasteries', [RoasteryController::class, 'deleteRoastery']);
     });
 });
