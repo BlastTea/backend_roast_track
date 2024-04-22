@@ -54,7 +54,7 @@ class RoastingController extends Controller
 
             // This is only temporary :)
             $order = Order::find($request->order_id);
-            if ($order->roastings->count() > 1) {
+            if ($order->roastings->count() > 0) {
                 $order->status = 'done';
                 $order->save();
             }
