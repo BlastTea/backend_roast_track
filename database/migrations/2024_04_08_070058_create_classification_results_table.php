@@ -16,7 +16,7 @@ class CreateClassificationResultsTable extends Migration
         Schema::create('classification_results', function (Blueprint $table) {
             $table->id();
             $table->foreignId('company_id')->constrained('companies');
-            $table->json('result');
+            $table->string('result', 255);
             $table->enum('result_label', ['green', 'light', 'medium', 'dark']);
             $table->timestamps();
         });

@@ -21,10 +21,10 @@ class CreateUsersTable extends Migration
             // $table->timestamp('email_verified_at')->nullable();
             $table->string('password', 100);
             $table->enum('role', ['admin', 'roastery']);
-            $table->string('name', 100);
+            $table->string('name', 100)->nullable();
             $table->string('address', 255)->nullable();
-            $table->string('phone_number', 13);
-            $table->string('description', 255);
+            $table->string('phone_number', 13)->nullable();
+            $table->string('description', 255)->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

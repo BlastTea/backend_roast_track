@@ -27,10 +27,6 @@ class RoasteryController extends Controller
             'username' => 'required|string|max:100',
             'email' => 'required|email|max:100',
             'password' => 'required|string',
-            'name' => 'required|string|max:100',
-            'address' => 'required|string|max:255',
-            'phone_number' => 'required|string|max:13',
-            'description' => 'required|string|max:255',
         ]);
 
         if ($validator->fails()) {

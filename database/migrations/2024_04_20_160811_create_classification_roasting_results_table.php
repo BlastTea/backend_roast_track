@@ -16,7 +16,7 @@ class CreateClassificationRoastingResultsTable extends Migration
         Schema::create('classification_roasting_results', function (Blueprint $table) {
             $table->id();
             $table->foreignId('roasting_id')->constrained();
-            $table->json('result');
+            $table->string('result', 255);
             $table->enum('result_label', ['green', 'light', 'medium', 'dark']);
             $table->timestamps();
         });
