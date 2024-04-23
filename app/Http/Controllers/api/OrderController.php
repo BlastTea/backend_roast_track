@@ -15,6 +15,8 @@ class OrderController extends Controller
         $validator = Validator::make($request->all(), [
             'status' => 'sometimes|in:in_progress,done',
             'with_degrees' => 'sometimes|boolean',
+            'start_date' => 'sometimes|date',
+            'finish_date' => 'sometimes|date|after:start_date'
         ]);
 
         if ($validator->fails()) {
@@ -23,14 +25,18 @@ class OrderController extends Controller
 
         $query = Order::query();
 
+        $query->where('company_id', $request->user()->company_id);
+        
+        if ($request->has('status')) {
+            $query->where('status', $request->status);
+        }
+
         if ($request->with_degrees) {
             $query->with(['roastings', 'roastings.degrees']);
         }
 
-        $query->where('company_id', $request->user()->company_id);
-
-        if ($request->has('status')) {
-            $query->where('status', $request->status);
+        if ($query->has('start_date') and $query->has('end_date')) {
+            $query->whereBetween('created_at', [$query->start_date, $query->finish_date]);
         }
 
         $orders = $query->get();

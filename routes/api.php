@@ -62,6 +62,8 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('v1/roastings', [RoastingController::class, 'addRoasting']);
 
         Route::post('v1/roasting-classifications', [ClassificationController::class, 'addRoastingClassification']);
+
+        Route::post('v1/classifications', [ClassificationController::class, 'getClassification']);
         Route::post('v1/classifications', [ClassificationController::class, 'addClassification']);
     });
 });

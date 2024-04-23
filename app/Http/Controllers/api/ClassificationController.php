@@ -31,6 +31,28 @@ class ClassificationController extends Controller
         return response()->json(['message' => 'Classification has been created', 'data' => $classification]);
     }
 
+    public function getClassification(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'start_date' => 'sometimes|date',
+            'finish_date' => 'sometimes|date|after:start_date'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json(['message' => $validator->errors()], 422);
+        }
+
+        $query = ClassificationResult::query();
+
+        if ($query->has('start_date') and $query->has('end_date')) {
+            $query->whereBetween('created_at', [$query->start_date, $query->finish_date]);
+        }
+
+        $classifications = $query->get();
+
+        return response()->json(['message' => 'Classification data is available', 'data' => $classifications]);
+    }
+
     public function addClassification(Request $request)
     {
         $validator = Validator::make($request->all(), [
