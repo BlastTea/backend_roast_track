@@ -32,7 +32,7 @@ class OrderController extends Controller
         }
 
         if ($request->with_degrees) {
-            $query->with(['roastings', 'roastings.degrees']);
+            $query->with(['roastings', 'roastings.degrees', 'roastings.classificationRoastingResults']);
         }
 
         if ($request->has('start_date') and $request->has('end_date')) {
