@@ -65,7 +65,7 @@ class ClassificationController extends Controller
         }
 
         $classification = new ClassificationResult;
-        $classification->company_id = $request->company_id;
+        $classification->company_id = $request->user()->company_id;
         $classification->result = $request->result;
         $classification->result_label = $request->result_label;
         $classification->save();
