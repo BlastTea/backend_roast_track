@@ -29,6 +29,7 @@ class SalesStatisticsController extends Controller
             DB::raw('SUM(total) as total_sales')
         )
             ->whereBetween('created_at', [$queryStart, $queryEnd])
+            ->where('company_id', $request->user()->company_id)
             ->groupBy('date')
             ->orderBy('date', 'asc')
             ->get()
