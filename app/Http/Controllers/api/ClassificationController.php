@@ -44,8 +44,8 @@ class ClassificationController extends Controller
 
         $query = ClassificationResult::query();
 
-        if ($query->has('start_date') and $query->has('end_date')) {
-            $query->whereBetween('created_at', [$query->start_date, $query->finish_date]);
+        if ($request->has('start_date') and $request->has('end_date')) {
+            $query->whereBetween('created_at', [$request->start_date, $request->finish_date]);
         }
 
         $classifications = $query->get();
