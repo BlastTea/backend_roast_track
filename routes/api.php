@@ -4,6 +4,7 @@ use App\Http\Controllers\api\AuthController;
 use App\Http\Controllers\api\ClassificationController;
 use App\Http\Controllers\api\CompanyController;
 use App\Http\Controllers\api\OrderController;
+use App\Http\Controllers\api\ProfileController;
 use App\Http\Controllers\api\RoasteryController;
 use App\Http\Controllers\api\RoastingController;
 use App\Http\Controllers\api\SalesStatisticsController;
@@ -42,6 +43,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
 
     Route::post('v1/sign-out', [AuthController::class, 'signOut']);
+    Route::post('v1/update-profile', [ProfileController::class, 'updateProfile']);
+    Route::post('v1/update-password', [ProfileController::class, 'updatePassword']);
 
     Route::get('v1/orders', [OrderController::class, 'getOrders']);
 
