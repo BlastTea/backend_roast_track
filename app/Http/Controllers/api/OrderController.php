@@ -14,6 +14,7 @@ class OrderController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'status' => 'sometimes|in:in_progress,done',
+            'with_degrees' => 'sometimes|boolean',
         ]);
 
         if ($validator->fails()) {
@@ -21,6 +22,10 @@ class OrderController extends Controller
         }
 
         $query = Order::query();
+
+        if ($request->with_degrees) {
+            $query->with(['roastings', 'roastings.degrees']);
+        }
 
         $query->where('company_id', $request->user()->company_id);
 
