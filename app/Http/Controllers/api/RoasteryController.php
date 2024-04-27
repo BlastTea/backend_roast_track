@@ -33,8 +33,10 @@ class RoasteryController extends Controller
             return response()->json(['message' => $validator->errors()], 422);
         }
 
+        $currentUser = $request->user()->load('company');
+
         $user = new User;
-        $user->company_id = $request->user()->company_id;
+        $user->company_id = $currentUser->company->id;
         $user->username = $request->username;
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
@@ -45,11 +47,10 @@ class RoasteryController extends Controller
         $user->description = $request->description;
         $user->save();
 
-        $company = $request->user()->load('company');
 
-        $msg = "Halo ". $request->email . ", Selamat datang di Roast Track. Admin telah menambahkan Anda di ". $company->name . ", dengan\n\nUsername : " . $request->username . '\nPassword : ' . $request->password;
+        $msg = "Halo ". $request->email . ", Selamat datang di Roast Track. Admin telah menambahkan Anda di ". $currentUser->company->name . ", dengan credential sebagai berikut:\n\nUsername : " . $request->username . "\nPassword : " . $request->password;
 
-        $msg = wordwrap($msg, 70);
+        // $msg = wordwrap($msg, 70);
 
         mail($request->email, "Selamat datang di Roast Track", $msg);
 
