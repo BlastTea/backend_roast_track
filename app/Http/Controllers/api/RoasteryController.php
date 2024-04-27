@@ -45,6 +45,14 @@ class RoasteryController extends Controller
         $user->description = $request->description;
         $user->save();
 
+        $company = $request->user()->load('company');
+
+        $msg = "Halo ". $request->email . ", Selamat datang di Roast Track. Admin telah menambahkan Anda di ". $company->name . ", dengan\n\nUsername : " . $request->username . '\nPassword : ' . $request->password;
+
+        $msg = wordwrap($msg, 70);
+
+        mail($request->email, "Selamat datang di Roast Track", $msg);
+
         return response()->json(['message' => 'Roastery has been created', 'data' => $user]);
     }
 

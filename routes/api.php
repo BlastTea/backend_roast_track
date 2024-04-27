@@ -23,17 +23,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/v1/send-email', function (Request $request) {
-    // the message
-    $msg = "First line of text\nSecond line of text";
-
-    // use wordwrap() if lines are longer than 70 characters
-    $msg = wordwrap($msg, 70);
-
-    // send email
-    mail("arya.jbr.999@gmail.com", "My subject", $msg);
-});
-
 Route::post('v1/sign-up', [AuthController::class, 'signUp']);
 Route::post('v1/sign-in', [AuthController::class, 'signIn']);
 
