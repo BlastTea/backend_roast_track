@@ -35,6 +35,12 @@ class RoasteryController extends Controller
 
         $currentUser = $request->user()->load('company');
 
+        $exists = User::where('username', $request->username)->orWhere('email', $request->email)->exists();
+
+        if ($exists) {
+            return response()->json(['message' => 'Roastery already exists'], 422);
+        }
+
         $user = new User;
         $user->company_id = $currentUser->company->id;
         $user->username = $request->username;
