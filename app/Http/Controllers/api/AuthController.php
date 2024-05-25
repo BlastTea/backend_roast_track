@@ -51,7 +51,7 @@ class AuthController extends Controller
         $user = User::with('company')->where('username', $request->username)->first();
 
         if (!$user || !Hash::check($request->password, $user->password)) {
-            return response()->json(['message' => 'Sign in failed'], 401);
+            return response()->json(['message' => 'Username or password is wrong'], 401);
         }
 
         $token = $user->createToken('api_token')->plainTextToken;
